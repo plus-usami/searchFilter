@@ -16,7 +16,7 @@ class App extends Component {
         "book"
       ],
       items: [],
-      visibility:true
+      visibility:false
     }
   }
 
@@ -32,24 +32,28 @@ class App extends Component {
   }
 
   visibilityChange = () => {
-    this.state.visibility == true ? this.setState({visibility:false}) :    this.setState({visibility:true});
-  }
-
-  visibilityStyle = "";
-
-  if( this.state.visibility == true){
-    visibilityStyle = {'display':'block'}
-  } else {
-    visibilityStyle = {'display':'none'}
+    this.state.visibility === true ? this.setState({visibility:false}) :    this.setState({visibility:true});
   }
 
   render() {
+    const commentStyle = {
+      'color':'#444',
+    }
+
+    let visibilityStyle = {};
+
+    {(() => {
+        this.state.visibility ? visibilityStyle = {'display':'block'} : visibilityStyle = {'display':'none'};
+    })()}
 
     return (
       <div>
         <form action="">
-          <input type="text" placeholder="search" onChange={this.filterList}/>
+          <input type="text" placeholder="search" onChange={this.filterList} style={{'padding':'10px','fontSize':'1rem','borderRadius':'5px'}}/>
         </form>
+        <Button variant="contained" color="primary" onClick={this.visibilityChange} style={{'marginTop':'20px'}}>
+          Show / Hide
+        </Button>
         <div style={visibilityStyle}>
           {this.state.items.map((item, index) => {
             return (
@@ -57,16 +61,8 @@ class App extends Component {
             )
           })}
         </div>
-        <Button variant="contained" color="primary" onClick={this.visibilityChange}>
-          Show/Hide
-        </Button>
       </div>
     );
-
-    const commentStyle = {
-      'color':'#444',
-    }
-
   }
 }
 
