@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
 
 class App extends Component {
   constructor() {
-    super() 
+    super()
     this.state = {
       initialItem: [
         "apple",
@@ -14,7 +15,8 @@ class App extends Component {
         "iphone",
         "book"
       ],
-      items: []
+      items: [],
+      visibility:true
     }
   }
 
@@ -29,21 +31,42 @@ class App extends Component {
     this.setState({items: updateList})
   }
 
+  visibilityChange = () => {
+    this.state.visibility == true ? this.setState({visibility:false}) :    this.setState({visibility:true});
+  }
+
+  visibilityStyle = "";
+
+  if( this.state.visibility == true){
+    visibilityStyle = {'display':'block'}
+  } else {
+    visibilityStyle = {'display':'none'}
+  }
+
   render() {
+
     return (
       <div>
         <form action="">
           <input type="text" placeholder="search" onChange={this.filterList}/>
         </form>
-        <div>
+        <div style={visibilityStyle}>
           {this.state.items.map((item, index) => {
             return (
-              <li key={index}>{item}</li>
-            )  
+              <p style={commentStyle} key={index}>{item}</p>
+            )
           })}
         </div>
+        <Button variant="contained" color="primary" onClick={this.visibilityChange}>
+          Show/Hide
+        </Button>
       </div>
     );
+
+    const commentStyle = {
+      'color':'#444',
+    }
+
   }
 }
 

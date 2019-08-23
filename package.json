@@ -2,7 +2,7 @@
   "name": "search-filter",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yoshimoto8.github.io/searchFilter",
+  "homepage": "./",
   "dependencies": {
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
