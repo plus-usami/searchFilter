@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 class App extends Component {
   constructor() {
@@ -18,10 +19,6 @@ class App extends Component {
       items: []
     }
   }
-  //
-  // componentDidMount() {
-  //   this.setState({items: this.state.initialItem})
-  // }
 
   filterList = (e) => {
     this.setState({items: this.state.initialItem})
@@ -38,6 +35,7 @@ class App extends Component {
   render() {
     const commentStyle = {
       'color':'#444',
+      
     }
     return (
       <div>
@@ -48,11 +46,17 @@ class App extends Component {
           Show / Hide
         </Button>
         <div>
+        <CSSTransitionGroup
+          transitionName="example"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}>
           {this.state.items.map((item, index) => {
             return (
               <p style={commentStyle} key={index}>{item}</p>
             )
           })}
+        </CSSTransitionGroup>
+
         </div>
       </div>
     );
