@@ -15,16 +15,16 @@ class App extends Component {
         "iphone",
         "book"
       ],
-      items: [],
-      visibility:false
+      items: []
     }
   }
-
-  componentDidMount() {
-    this.setState({items: this.state.initialItem})
-  }
+  //
+  // componentDidMount() {
+  //   this.setState({items: this.state.initialItem})
+  // }
 
   filterList = (e) => {
+    this.setState({items: this.state.initialItem})
     const updateList = this.state.initialItem.filter((item) => {
       return item.toLowerCase().search( e.target.value.toLowerCase()) !== -1;
     })
@@ -32,20 +32,13 @@ class App extends Component {
   }
 
   visibilityChange = () => {
-    this.state.visibility === true ? this.setState({visibility:false}) :    this.setState({visibility:true});
+    this.state.items == this.state.initialItem ? this.setState({items:[]}) :this.setState({items:this.state.initialItem})
   }
 
   render() {
     const commentStyle = {
       'color':'#444',
     }
-
-    let visibilityStyle = {};
-
-    {(() => {
-        this.state.visibility ? visibilityStyle = {'display':'block'} : visibilityStyle = {'display':'none'};
-    })()}
-
     return (
       <div>
         <form action="">
@@ -54,7 +47,7 @@ class App extends Component {
         <Button variant="contained" color="primary" onClick={this.visibilityChange} style={{'marginTop':'20px'}}>
           Show / Hide
         </Button>
-        <div style={visibilityStyle}>
+        <div>
           {this.state.items.map((item, index) => {
             return (
               <p style={commentStyle} key={index}>{item}</p>
